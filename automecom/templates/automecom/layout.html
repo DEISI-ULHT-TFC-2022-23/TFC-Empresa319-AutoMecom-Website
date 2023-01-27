@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'automecom/css/estilos.css' %}">
+
+    <meta charset="UTF-8">
+    <title>Auto Mecom</title>
+</head>
+
+
+<body>
+  <header>
+    <div>Auto Mecom</div>
+    <nav>
+      <a href="home.html">AutoMecom</a>
+      <a href="">Oficina</a>
+      <a href="">Sobre Nós</a>
+      <a href="">Serviços</a>
+      <a href="">Marcações</a>
+      <a href="">Contactos</a>
+    </nav>
+  </header>
+
+  <main>
+      {% block main %}
+      {% endblock main %}
+  </main>
+
+  <footer>Auto Mecom, 2022</footer>
