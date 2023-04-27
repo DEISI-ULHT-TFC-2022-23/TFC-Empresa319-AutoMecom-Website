@@ -7,7 +7,7 @@
 
 header {
   height: 10vh;
-  background: rgba(25, 35, 91, 0.89);
+  background: rgb(10, 20, 47);
   color: white;
   top: 0;
 
@@ -19,7 +19,7 @@ header {
 
 header div {
   font-size: 2em;
-  padding: 1em;
+  padding: 1.2em;
 }
 
 header nav {
@@ -29,7 +29,7 @@ header nav {
 
 
 nav a {
-  padding: 0 1em;
+  padding: 0 3em;
   text-decoration: none;
   font-size: 1rem;
   color: lightgray;
@@ -38,8 +38,26 @@ nav a {
 
 main {
   height: 85vh;
-  background-color:grey;
+  background-color:white;
   padding: 4em 4em;
+}
+
+button {
+  background: rgb(10, 20, 47);
+  border-radius: 8px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  width: 16%;
+}
+
+#mecanico{
+  float:right;
 }
 
 footer {
