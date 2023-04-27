@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Mecom | Serviços</title>
+</head>
+{% extends 'automecom/layout.html' %}
+
+{% block main %}
+{% load static %}
+<body>
+
+<h1 class="base">Serviços</h1>
+<br>
+<br>
+<section>
+{% for Servico in servicos %}
+    <div class="Serv">
+        <div>
+            <br>
+        <h2>{{Servico.nome}}</h2>
+            <br>
+        <p>{{Servico.descricao}}</p>
+        </div>
+    </div>
+    <br>
+    <a href="{% url 'automecom:editar' Servico.id %}" class="botao">Editar</a>
+    <a href="{% url 'automecom:apagar' Servico.id %}" class="botao">Apagar</a>
+    <br>
+{% endfor %}
+</section>
+<div class="outro">
+        <a href="{% url 'automecom:Create' %}" class="botao">+ Adicionar Serviço</a>
+    </div>
+</body>
+</html>
+{% endblock %}
