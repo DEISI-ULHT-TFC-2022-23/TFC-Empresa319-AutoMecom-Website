@@ -5,6 +5,12 @@
   font-family: sans-serif;
 }
 
+header .logo{
+  text-decoration: none;
+  font-size: 2em;
+  padding: 30px;
+}
+
 header {
   height: 10vh;
   background: rgb(10, 20, 47);
@@ -17,16 +23,10 @@ header {
   align-items: center;
 }
 
-header div {
-  font-size: 2em;
-  padding: 1.2em;
-}
-
 header nav {
   display:flex;
   justify-content: flex-end;
 }
-
 
 nav a {
   padding: 0 3em;

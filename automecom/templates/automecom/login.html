@@ -1,0 +1,23 @@
+{% extends "automecom/layout.html" %}
+
+{% block main %}
+    {% load static %}
+
+    <h1>Login</h1>
+
+    {% if message %}
+      <p> {{ message }} </p>
+    {% endif %}
+
+    <form action="{% url 'automecom:login' %}" method="post">
+        {% csrf_token %}
+        <label>
+            <input type="text" name="username" placeholder="username">
+        </label>
+        <label>
+            <input type="password" name="password" placeholder="password">
+        </label>
+
+        <input type="submit" value="Login">
+    </form>
+{% endblock main %}
