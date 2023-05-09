@@ -1,11 +1,11 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from .forms import ServicoForm
-from .models import Servico
+from .models import Servico, RegisterForm, Utilizador
 
 
 def is_superuser(user):
@@ -39,13 +39,24 @@ def view_login(request):
 
 def servico_view(request):
     servicos = Servico.objects.all()
-    return render(request, 'automecom/servico.html', {'servicos': servicos})
+
+    user=request.user
+
+    utilizador = Utilizador.objects.get(user=user)
+
+    return render(request, 'automecom/servico.html', {'servicos': servicos, 'administrador' : utilizador.administrador})
 
 
-@login_required
 def servico_create(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('automecom:login'))
+
+    user = request.user
+
+    utilizador = Utilizador.objects.get(user=user)
+
+    if not utilizador.administrador:
+        return HttpResponseRedirect(reverse('automecom:Home'))
 
     if request.method == 'POST':
         form = ServicoForm(request.POST, request.FILES)
@@ -53,6 +64,7 @@ def servico_create(request):
             form.save()
             return HttpResponseRedirect(reverse('automecom:Servico'))
     form = ServicoForm()
+
     context = {'form': form}
     return render(request, 'automecom/create.html', context)
 
@@ -92,3 +104,24 @@ def sobre_view(request):
 
 def marcacao_view(request):
     return render(request, 'automecom/marcacao.html')
+
+
+def register_view(request):
+    if request.method == 'GET':
+        form = RegisterForm()
+        return render(request, 'automecom/register.html', {'form': form})
+
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            utilizador = Utilizador()
+            utilizador.nome = user.username
+            utilizador.user = user
+            user.save()
+            utilizador.save()
+            login(request, user)
+            return redirect('automecom:Home')
+        else:
+            return render(request, 'automecom/register.html', {'form': form})

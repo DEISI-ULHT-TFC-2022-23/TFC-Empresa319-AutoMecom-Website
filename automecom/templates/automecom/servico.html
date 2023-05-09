@@ -24,13 +24,17 @@
         </div>
     </div>
     <br>
+    {% if administrador %}
     <a href="{% url 'automecom:editar' Servico.id %}" class="botao">Editar</a>
     <a href="{% url 'automecom:apagar' Servico.id %}" class="botao">Apagar</a>
+    {% endif %}
     <br>
 {% endfor %}
 </section>
 <div class="outro">
+    {% if administrador %}
         <a href="{% url 'automecom:Create' %}" class="botao">+ Adicionar Serviço</a>
+    {% endif %}
     </div>
 </body>
 </html>
