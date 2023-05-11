@@ -27,6 +27,8 @@ nav a {
   text-decoration: none;
   font-size: 1rem;
   color: lightgray;
+  overflow: hidden;
+  height: 100%;
 }
 
 
@@ -47,7 +49,7 @@ button {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-  width: 16%;
+    width: 16%;
 }
 
 #mecanico{
@@ -84,3 +86,41 @@ footer {
   padding: 0 2vw;
   align-items: center;
 }
+
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: red;
+  width: 100%;
+  z-index: 1;
+  height: 40px;
+}
+
+.subnav-content a {
+  float: right;
+  color: white;
+  text-decoration: none;
+}
+
+.subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.subnav:hover .subnav-content {
+  display: block;
+}
+
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+.subnav .subnavbtn {
+  border: none;
+  outline: none;
+  color: white;
+  font-family: inherit;
+}
+

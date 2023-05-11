@@ -12,7 +12,8 @@ urlpatterns = [
     path('conselhos.html', views.conselho_view, name="Conselho"),
     path('contactos.html', views.contacto_view, name="Contacto"),
     path('sobre.html', views.sobre_view, name="Sobre"),
-    path('marcacao.html', views.marcacao_view, name="Marcação"),
+    path('marcacao', views.marcacao_view, name="Marcação"),
     path('login.html', views.view_login, name='login'),
+    path('logout', views.view_logout, name='logout'),
     path('register.html', views.register_view, name='register'),
 ]

@@ -1,3 +1,4 @@
+{% load custom_tags %}
 <!DOCTYPE html>
 {% load static %}
 <html lang="pt">
@@ -18,9 +19,24 @@
         <a href="servico.html">Serviços</a>
         <a href="conselhos.html">Conselhos</a>
         <a href="contactos.html">Contactos</a>
-        <a href="marcacao.html">Marcação</a>
-        <a href="login.html">Login</a>
-        <a href="register.html">Registar</a>
+        <a href="marcacao">Marcação</a>
+        {% if not request.user.is_authenticated %}
+            <a href="login.html">Login</a>
+            <a href="register.html">Registar</a>
+        {% endif %}
+        <div class="subnav">
+        {% if request.user.is_authenticated %}
+            <a class="subnavbtn">Pessoa<i class="fa fa-caret-down"></i></a>
+                <div class="subnav-content">
+                    <a href="#perfil">Perfil</a>
+                    <a href="#team">Marcações</a>
+                    {% if user|is_administrador %}
+                        <a href="#perfil">Lista Marcações</a>
+                    {% endif %}
+                    <a href="logout">Logout</a>
+                </div>
+        {% endif %}
+        </div>
     </nav>
   </header>
 

@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -18,6 +18,11 @@ def is_superuser(user):
 
 def home_view(request):
     return render(request, 'automecom/home.html')
+
+@login_required
+def view_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('automecom:Home'))
 
 
 def view_login(request):
@@ -114,7 +119,7 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.username = user.username.lower()
+            user.username = user.username
             utilizador = Utilizador()
             utilizador.nome = user.username
             utilizador.user = user
