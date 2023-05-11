@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% extends 'automecom/layout.html' %}
+{% load custom_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Auto Mecom | Serviços</title>
 </head>
-{% extends 'automecom/layout.html' %}
 
 {% block main %}
 {% load static %}
@@ -24,7 +25,7 @@
         </div>
     </div>
     <br>
-    {% if administrador %}
+     {% if user|is_administrador %}
     <a href="{% url 'automecom:editar' Servico.id %}" class="botao">Editar</a>
     <a href="{% url 'automecom:apagar' Servico.id %}" class="botao">Apagar</a>
     {% endif %}

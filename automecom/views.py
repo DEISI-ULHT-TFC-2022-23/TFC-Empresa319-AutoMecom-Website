@@ -4,8 +4,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from automecom.templatetags.custom_tags import is_administrador
 from .forms import ServicoForm
 from .models import Servico, RegisterForm, Utilizador
+from django import template
+
+register = template.Library()
 
 
 def is_superuser(user):
@@ -40,22 +44,15 @@ def view_login(request):
 def servico_view(request):
     servicos = Servico.objects.all()
 
-    user=request.user
-
-    utilizador = Utilizador.objects.get(user=user)
-
-    return render(request, 'automecom/servico.html', {'servicos': servicos, 'administrador' : utilizador.administrador})
+    return render(request, 'automecom/servico.html',
+                  {'servicos': servicos, 'administrador': is_administrador(request.user)})
 
 
 def servico_create(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('automecom:login'))
 
-    user = request.user
-
-    utilizador = Utilizador.objects.get(user=user)
-
-    if not utilizador.administrador:
+    if not is_administrador(request.user):
         return HttpResponseRedirect(reverse('automecom:Home'))
 
     if request.method == 'POST':
@@ -69,8 +66,10 @@ def servico_create(request):
     return render(request, 'automecom/create.html', context)
 
 
-@login_required
 def servico_edit(request, post_id):
+    if not is_administrador(request.user):
+        return HttpResponseRedirect(reverse('automecom:Home'))
+
     post = Servico.objects.get(id=post_id)
     if request.method == 'POST':
         form = ServicoForm(request.POST, request.FILES, instance=post)
