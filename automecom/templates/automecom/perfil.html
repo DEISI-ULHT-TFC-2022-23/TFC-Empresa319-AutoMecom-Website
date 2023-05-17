@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Mecom | Perfil</title>
+</head>
+{% extends 'automecom/layout.html' %}
+
+{% block main %}
+{% load static %}
+<body>
+<p>PERFIL</p>
+
+<section>
+<form method ="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ form2.as_p }}
+    {{ form3.as_p }}
+    <a href="{% url 'automecom:Home' %}" role="button">Cancelar</a>
+    <div class="gravar">
+        <input type="submit" value="Gravar">
+    </div>
+</form>
+</section>
+</body>
+</html>
+{% endblock %}

@@ -1,12 +1,13 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from automecom.templatetags.custom_tags import is_administrador
-from .forms import ServicoForm
-from .models import Servico, RegisterForm, Utilizador
+from .forms import ServicoForm, UtilizadorForm, UserForm, PasswordForm, RegisterForm
+from .models import Servico, Utilizador
 from django import template
 
 register = template.Library()
@@ -18,6 +19,7 @@ def is_superuser(user):
 
 def home_view(request):
     return render(request, 'automecom/home.html')
+
 
 @login_required
 def view_logout(request):
@@ -106,10 +108,6 @@ def sobre_view(request):
     return render(request, 'automecom/sobre.html')
 
 
-def marcacao_view(request):
-    return render(request, 'automecom/marcacao.html')
-
-
 def register_view(request):
     if request.method == 'GET':
         form = RegisterForm()
@@ -129,3 +127,39 @@ def register_view(request):
             return redirect('automecom:Home')
         else:
             return render(request, 'automecom/register.html', {'form': form})
+
+
+def perfil_view(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('automecom:login'))
+
+    post = Utilizador.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=request.user)
+        form2 = UtilizadorForm(request.POST, request.FILES, instance=post)
+        form3 = PasswordForm(request.user, request.POST)
+        if form.is_valid():
+            if form2.is_valid():
+                if form3.is_valid():
+                    form.save()
+                    form2.save()
+                    form3.save()
+            return HttpResponseRedirect(reverse('automecom:perfil'))
+    else:
+        form = UserForm(instance=request.user)
+        form2 = UtilizadorForm(instance=post)
+        form3 = PasswordForm(request.user)
+        context = {'form': form, 'form2': form2, 'form3': form3}
+    return render(request, 'automecom/perfil.html', context)
+
+
+@login_required
+def utilizador_delete(request, post_id):
+    if Utilizador.objects.filter(pk=post_id).exists():
+        logout(request)
+        Utilizador.objects.get(pk=post_id).user.delete()
+    return HttpResponseRedirect(reverse('automecom:Home'))
+
+
+def marcacao_view(request):
+    return render(request, 'automecom/marcacao.html')

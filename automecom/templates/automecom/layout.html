@@ -21,14 +21,14 @@
         <a href="contactos.html">Contactos</a>
         <a href="marcacao">Marcação</a>
         {% if not request.user.is_authenticated %}
-            <a href="login.html">Login</a>
-            <a href="register.html">Registar</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Registar</a>
         {% endif %}
         <div class="subnav">
         {% if request.user.is_authenticated %}
-            <a class="subnavbtn">Pessoa<i class="fa fa-caret-down"></i></a>
+            <a class="subnavbtn">{{ user.username }}<i class="fa fa-caret-down"></i></a>
                 <div class="subnav-content">
-                    <a href="#perfil">Perfil</a>
+                    <a href="perfil.html">Perfil</a>
                     <a href="#marcacoes">Marcações</a>
                     {% if user|is_administrador %}
                         <a href="#lista">Lista de marcações</a>

@@ -22,7 +22,23 @@ header nav {
   justify-content: flex-end;
 }
 
+nav {
+  height: 100%;
+}
+
 nav a {
+  padding: 0 3em;
+  text-decoration: none;
+  font-size: 1rem;
+  color: lightgray;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subnav a {
   padding: 0 4em;
   text-decoration: none;
   font-size: 1rem;
@@ -30,6 +46,7 @@ nav a {
   overflow: hidden;
   height: 100%;
 }
+
 
 .subnav {
   position: relative;
@@ -42,15 +59,21 @@ nav a {
   color: lightgray;
   overflow: hidden;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .subnav-content {
   display: none;
-  position: absolute;
+  position: relative;
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
+  margin-top: -22px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .subnav-content a {
@@ -71,8 +94,6 @@ nav a {
 }
 
 .subnav:hover .subnavbtn {
-  background-color: white;
-  color: #0A142FFF;
 }
 
 main {
