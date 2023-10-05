@@ -1,27 +1,31 @@
 <!DOCTYPE html>
-{% extends 'automecom/layout.html' %}
-{% load custom_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Auto Mecom | Serviços</title>
 </head>
 
+{% extends 'automecom/layout.html' %}
+{% load custom_tags %}
+
 {% block main %}
 {% load static %}
 <body>
 
-<h1 class="base">Serviços</h1>
-<br>
-<br>
+<div class="Serviços">
+
+<h2 class="base">PRINCIPAIS SERVIÇOS DE OFICINA MECÂNICA</h2>
+
+<p class="SMALL">Na oficina mecânica Auto Mecom, a nossa equipa presta serviços especializados em manutenção e reparação auto, todos os dias.</p>
+
+<p class="BIG">Seja qual for o problema do seu veículo, pode sempre contar com a nossa experiência e profissionalismo para o resolvermos.</p>
+<br><br>
 <section>
 {% for Servico in servicos %}
     <div class="Serv">
         <div>
-            <br>
-        <h2>{{Servico.nome}}</h2>
-            <br>
-        <p>{{Servico.descricao}}</p>
+        <h3>{{Servico.nome}}</h3>
+        <p class="SMALL">{{Servico.descricao}}</p>
         </div>
     </div>
     <br>
@@ -37,6 +41,8 @@
         <a href="{% url 'automecom:Create' %}" class="botao">+ Adicionar Serviço</a>
     {% endif %}
     </div>
+
+</div>
 </body>
 </html>
 {% endblock %}

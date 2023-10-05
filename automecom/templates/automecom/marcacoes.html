@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Mecom | Marcações</title>
+</head>
+
+{% extends 'automecom/layout.html' %}
+{% load custom_tags %}
+
+{% block main %}
+{% load static %}
+
+<body>
+{% if user|is_administrador %}
+<p>Lista de Marcações</p>
+{% else %}
+<p>Suas Marcações</p>
+{% endif %}
+
+<section>
+{% for marcacao in marcacoes %}
+    <div class="Serv">
+        <div>
+            <br>
+            {% if user|is_administrador %}
+            <p>{{marcacao.nome}} {{marcacao.apelido}}</p>
+            <p>{{marcacao.descricao}}</p>
+            <p>{{marcacao.data}} - {{marcacao.hora}}</p>
+            <p>{{marcacao.estado}}</p>
+            {% else %}
+            <p>{{marcacao.descricao}}</p>
+            <p>{{marcacao.data}} - {{marcacao.hora}}</p>
+            <p>{{marcacao.estado}}</p>
+            {% endif %}
+            <br>
+        </div>
+    </div>
+    {% if user|is_administrador %}
+    <a href="{% url 'automecom:editarmarc' marcacao.id %}" class="botao">Editar</a>
+    <a href="{% url 'automecom:apagarmarc' marcacao.id %}" class="botao">Apagar</a>
+    {% else %}
+    <a href="{% url 'automecom:editarmarc' marcacao.id %}" class="botao">Alterar</a>
+    <a href="{% url 'automecom:apagarmarc' marcacao.id %}" class="botao">Cancelar</a>
+    {% endif %}
+    <br>
+{% endfor %}
+</section>
+
+</body>
+</html>
+{% endblock %}

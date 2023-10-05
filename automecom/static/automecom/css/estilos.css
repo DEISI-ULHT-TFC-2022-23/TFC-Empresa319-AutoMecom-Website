@@ -10,11 +10,18 @@ header {
   background: rgb(10, 20, 47);
   color: white;
   top: 0;
-
+  z-index: 1000;
+  position: fixed;
   /* alinha logo e menu */
   display:flex;
   justify-content: space-between;
   align-items: center;
+  width:100%
+}
+
+.espace{
+    height: 10vh;
+    width:100%
 }
 
 header nav {
@@ -99,7 +106,11 @@ nav a {
 main {
   height: 85vh;
   background-color:white;
-  padding: 4em 4em;
+}
+
+.conteudo {
+    padding: 4em 4em;
+    min-height: 100%;
 }
 
 button {
@@ -144,10 +155,134 @@ padding: 20px;
 }
 
 footer {
-  height:5vh;
-  display:flex;
+   height: 5vh;
+  display: flex;
   justify-content: flex-end;
-  padding: 0 2vw;
   align-items: center;
+  background: #0A142FFF;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  bottom: 0;
+  width: 100%;
 }
 
+footer .creditos {
+    background: #0A142FFF;
+    width: 100%;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0.24px;
+    color: #ffffff;
+    padding: 50px 0;
+}
+
+footer .creditos .container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container, .container-fluid {
+    position: relative;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.leftsubmenu {
+    display: flex;
+}
+
+footer .creditos .container div {
+    text-align: right;
+}
+
+footer .rightsubmenu {
+    color: white;
+    font-size: 12px;
+}
+
+.leftsubmenu{
+    padding-left: 180px;
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+footer ul {
+    padding-left: 180px;
+    list-style: none;
+    text-align: left;
+}
+
+footer .creditos a{
+    color:#B5B5B9;
+}
+
+footer .creditos a:hover{
+    transition: all ease-in-out .2s;
+    -moz-transition: all ease-in-out .2s;
+    -webkit-transition: all ease-in-out .2s;
+    text-decoration: none;
+    cursor: pointer;
+    color: currentColor;
+}
+
+footer .creditos ul {
+    font-size: 12px;
+}
+
+.sub-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+footer .social {
+    font-size: 0;
+    padding: 5px 0;
+    text-align: right;
+}
+
+.fa{
+    padding: 3px;
+}
+
+
+
+.Serviços {
+    padding-left: 210px;
+    padding-right: 210px;
+}
+
+.Serviços h2{
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: black;
+    font-style: italic;
+    line-height: inherit;
+    margin: 0.75em 0;
+    text-transform: uppercase;
+}
+
+.SMALL{
+    font-size: 1.125rem;
+    font-weight: 300;
+    line-height: 1.56;
+    color: #5d5c5c;
+    margin: 1em 0;
+}
+
+.BIG {
+    display: inline-block;
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-style: normal;
+    color:black;
+    line-height: 1.75;
+    padding: 0.5em 0 0.5em 40px;
+    position: relative;
+}

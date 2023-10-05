@@ -1,15 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Auto Mecom | Marcação</title>
-</head>
+
 {% extends 'automecom/layout.html' %}
+{% load custom_tags %}
+
+    {% block styles %}
+        <style>
+        th {
+            text-align:right;
+        }
+        td {
+            width: 100%;
+        }
+        </style>
+
+    {% endblock %}
 
 {% block main %}
 {% load static %}
-<body>
-<p>EFETUE UM PEDIDO DE MARCAÇÃO</p>
-</body>
-</html>
+
+
+<h1>EFETUE UM PEDIDO DE MARCAÇÃO</h1>
+
+<form action="{% url 'automecom:Marcação' %}" method="post">
+        {% csrf_token %}
+        <h2>Marcação</h2>
+        <table>
+	    {{ form }}
+
+        </table>
+
+    <br>
+    <h2>Veículo</h2>
+        <table>
+	    {{ form2 }}
+        </table>
+	    <input type="submit" value="Marcar" />
+</form>
+
+
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'automecom/layout.html' %}
+
+
+{% block main %}
+<h3>Novo Post</h3>
+<section>
+<form method ="POST" action="{% url 'automecom:editarmarc'  post_id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a href="{% url 'automecom:Marcação' %}" role="button">Cancelar</a>
+    <div class="gravar">
+        <input type="submit" value="Gravar">
+    </div>
+    <a href="{% url 'automecom:apagarmarc' post_id %}" role="button">Apagar</a>
+</form>
+</section>
+{% endblock %}

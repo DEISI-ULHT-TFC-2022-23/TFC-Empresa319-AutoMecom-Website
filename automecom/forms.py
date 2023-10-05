@@ -1,8 +1,11 @@
+from datetime import datetime
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 
-from .models import Servico, Utilizador, Veiculo
+from .models import Servico, Utilizador, Veiculo, Marcacao
+from .widget import DatePickerInput, TimePickerInput
 
 
 class ServicoForm(forms.ModelForm):
@@ -14,7 +17,7 @@ class ServicoForm(forms.ModelForm):
 class RegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
 
 class UserForm(forms.ModelForm):
@@ -43,7 +46,18 @@ class VeiculoForm(forms.ModelForm):
         fields = ['marca', 'modelo', 'ano', 'matricula']
 
 
-class MarcacaoForm(forms.ModelForm):
+class MarcacaoForm(forms.Form):
+    nome = forms.CharField(max_length=200)
+    apelido = forms.CharField(max_length=200)
+    email = forms.CharField(max_length=200)
+    servicos = forms.ModelMultipleChoiceField(queryset=Servico.objects.all())
+    telefone = forms.IntegerField()
+    descricao = forms.CharField(max_length=500)
+    data = forms.DateField(widget=DatePickerInput)
+    hora = forms.TimeField(widget=TimePickerInput)
+
+
+class MarcacaoEditForm(forms.ModelForm):
     class Meta:
-        model = Veiculo
-        fields = ['utilizador', 'servicos', 'ano', 'data', 'descricao', 'estado']
+        model = Marcacao
+        fields = ['nome', 'apelido', 'email', 'servicos', 'telefone', 'data', 'descricao', 'estado', 'hora']

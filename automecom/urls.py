@@ -17,4 +17,7 @@ urlpatterns = [
     path('logout', views.view_logout, name='logout'),
     path('register.html', views.register_view, name='register'),
     path('perfil.html', views.perfil_view, name="perfil"),
+    path('marcacoes', views.marcacoes_view, name="marcacoes"),
+    path('editmarc/<int:post_id>', views.marcacao_edit, name='editarmarc'),
+    path('deletemarc/<int:post_id>', views.marcacao_delete, name='apagarmarc'),
 ]

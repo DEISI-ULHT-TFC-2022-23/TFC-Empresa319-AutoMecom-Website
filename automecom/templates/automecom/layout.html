@@ -3,11 +3,20 @@
 {% load static %}
 <html lang="pt">
 <head>
+    <meta charset="UTF-8">
+    <title>Auto Mecom </title>
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'automecom/css/estilos.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
+    {% block styles %}
+    
+    {% endblock %}
+    
     <meta charset="UTF-8">
-    <title>Auto Mecom | Oficina Auto</title>
 </head>
 
 
@@ -29,9 +38,10 @@
             <a class="subnavbtn">{{ user.username }}<i class="fa fa-caret-down"></i></a>
                 <div class="subnav-content">
                     <a href="perfil.html">Perfil</a>
-                    <a href="#marcacoes">Marcações</a>
                     {% if user|is_administrador %}
-                        <a href="#lista">Lista de marcações</a>
+                        <a href="marcacoes">Lista de marcações</a>
+                        {% else %}
+                        <a href="marcacoes">Marcações</a>
                     {% endif %}
                     <a href="logout">Terminar sessão</a>
                 </div>
@@ -39,10 +49,39 @@
         </div>
     </nav>
   </header>
+  <div class="espace"></div>
 
   <main>
+  <div class="conteudo">
       {% block main %}
       {% endblock main %}
+  </div>
+
+    <footer>
+      <div class="creditos">
+          <div class="container">
+              <div class="leftsubmenu">
+                  <div>
+                      <ul class="sub-menu">
+                          <p>2023 © AutoMecom</p>
+                          <br>
+                            <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+
+                            <li><a href="/regulamento-da-garantia-na-manutencao-auto">Regulamento da Garantia na Manutenção Auto</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="rightsubmenu">
+                  <p>Siga-nos em:</p>
+                  <div class="social">
+                      <a><a href="//www.instagram.com/automecom/" target="_blank"><i class="fa fa-instagram" style="font-size:25px;"></i></a></a>
+                      <a><a href="//www.google.com/maps/place/Auto+Mecom+Unipessoal,+Lda/@38.7295854,-9.3224715,15z/data=!4m6!3m5!1s0xd1ecee2af2d6dd1:0xbca453df95bf3380!8m2!3d38.7295854!4d-9.3224715!16s%2Fg%2F11f3xl345d?entry=ttu" target="_blank"><i class="fa fa-google" style="font-size:25px;"></i></a></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
   </main>
 
-  <footer>Auto Mecom, 2023</footer>
+</body>
+</html>
