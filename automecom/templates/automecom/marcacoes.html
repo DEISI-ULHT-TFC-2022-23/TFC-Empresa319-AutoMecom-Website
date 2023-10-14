@@ -25,12 +25,17 @@
             <br>
             {% if user|is_administrador %}
             <p>{{marcacao.nome}} {{marcacao.apelido}}</p>
+            {% for servico in marcacao.servicos.all %}
+            <p>{{ servico.nome }}</p>
+            {% endfor %}
             <p>{{marcacao.descricao}}</p>
-            <p>{{marcacao.data}} - {{marcacao.hora}}</p>
+            <p>{{marcacao.data}} / {{marcacao.hora}}</p>
+            <p>{{marcacao.orcamento}}</p>
             <p>{{marcacao.estado}}</p>
             {% else %}
             <p>{{marcacao.descricao}}</p>
-            <p>{{marcacao.data}} - {{marcacao.hora}}</p>
+            <p>{{marcacao.data}} / {{marcacao.hora}}</p>
+            <p>{{marcacao.orcamento}}</p>
             <p>{{marcacao.estado}}</p>
             {% endif %}
             <br>

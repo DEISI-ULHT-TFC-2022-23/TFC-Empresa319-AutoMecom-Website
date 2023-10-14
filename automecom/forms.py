@@ -4,14 +4,20 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 
-from .models import Servico, Utilizador, Veiculo, Marcacao
+from .models import Servico, Utilizador, Veiculo, Marcacao, TipoServico
 from .widget import DatePickerInput, TimePickerInput
 
 
 class ServicoForm(forms.ModelForm):
     class Meta:
         model = Servico
-        fields = ['nome', 'descricao']
+        fields = ['tipo', 'nome', 'descricao']
+
+
+class TipoServicoForm(forms.ModelForm):
+    class Meta:
+        model = TipoServico
+        fields = ['nome']
 
 
 class RegisterForm(UserCreationForm):
@@ -43,7 +49,7 @@ class PasswordForm(PasswordChangeForm):
 class VeiculoForm(forms.ModelForm):
     class Meta:
         model = Veiculo
-        fields = ['marca', 'modelo', 'ano', 'matricula']
+        fields = ['marca', 'modelo', 'ano', 'matricula', 'kms']
 
 
 class MarcacaoForm(forms.Form):
@@ -60,4 +66,5 @@ class MarcacaoForm(forms.Form):
 class MarcacaoEditForm(forms.ModelForm):
     class Meta:
         model = Marcacao
-        fields = ['nome', 'apelido', 'email', 'servicos', 'telefone', 'data', 'descricao', 'estado', 'hora']
+        fields = ['nome', 'apelido', 'email', 'servicos', 'telefone', 'data', 'descricao', 'estado', 'hora',
+                  'orcamento', 'observacoes', 'fatura']

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Auto Mecom | Registar</title>
@@ -8,20 +7,19 @@
 
 {% block main %}
 {% load static %}
-<body>
-<p>Registar</p>
+<div class="subblock2">
+<div class="loginblock2">
 
 {% block content %}
 
 <form method="POST" novalidate>
 	{% csrf_token %}
-	<h2>Sign Up</h2>
+	<h2>Criação de conta</h2><br><br>
 	{{ form.as_p }}
-	<input type="submit" value="Register" />
+    <br>
+	<input class="submit" type="submit" value="Criar a minha conta" />
 </form>
-
+</div>
+</div>
 {% endblock content%}
-
-</body>
-</html>
 {% endblock %}

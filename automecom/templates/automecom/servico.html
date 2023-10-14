@@ -12,9 +12,11 @@
 {% load static %}
 <body>
 
-<div class="Serviços">
+<div class="cabeçalho">
+        <div class="texto"><h1>Oficina Auto Mecom – Serviços de Mecânica e Colisão</h1></div>
+</div>
 
-<h2 class="base">PRINCIPAIS SERVIÇOS DE OFICINA MECÂNICA</h2>
+<div class="Serviços">
 
 <p class="SMALL">Na oficina mecânica Auto Mecom, a nossa equipa presta serviços especializados em manutenção e reparação auto, todos os dias.</p>
 
@@ -28,20 +30,18 @@
         <p class="SMALL">{{Servico.descricao}}</p>
         </div>
     </div>
-    <br>
      {% if user|is_administrador %}
     <a href="{% url 'automecom:editar' Servico.id %}" class="botao">Editar</a>
     <a href="{% url 'automecom:apagar' Servico.id %}" class="botao">Apagar</a>
     {% endif %}
     <br>
+    <br>
 {% endfor %}
 </section>
-<div class="outro">
     {% if administrador %}
         <a href="{% url 'automecom:Create' %}" class="botao">+ Adicionar Serviço</a>
     {% endif %}
     </div>
-
 </div>
 </body>
 </html>

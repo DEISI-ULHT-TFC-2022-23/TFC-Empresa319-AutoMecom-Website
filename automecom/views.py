@@ -104,6 +104,32 @@ def contacto_view(request):
     return render(request, 'automecom/contactos.html')
 
 
+def garantia_view(request):
+    return render(request, 'automecom/garantia.html')
+
+
+def privacidade_view(request):
+    return render(request, 'automecom/privacidade.html')
+
+
+def obras_view(request):
+    utilizador = Utilizador.objects.get(user=request.user)
+    context = {
+        "marcacoes": Marcacao.objects.filter(utilizador_id=utilizador),
+        "estado": Marcacao.estado,
+        "data": Marcacao.data,
+        "hora": Marcacao.hora,
+    }
+    if is_administrador(request.user):
+        context = {
+            "marcacoes": Marcacao.objects.all(),
+            "estado": Marcacao.estado,
+            "data": Marcacao.data,
+            "hora": Marcacao.hora,
+        }
+    return render(request, 'automecom/obras.html', context)
+
+
 def sobre_view(request):
     return render(request, 'automecom/sobre.html')
 
@@ -124,6 +150,7 @@ def marcacoes_view(request):
             "descricao": Marcacao.descricao,
             "data": Marcacao.data,
             "hora": Marcacao.hora,
+            "fatura": Marcacao.fatura,
         }
     return render(request, 'automecom/marcacoes.html', context)
 
@@ -202,17 +229,21 @@ def marcacao_view(request):
                 veiculo = form2.save()
                 marcacao = Marcacao(nome=request.user.first_name, apelido=request.user.last_name,
                                     email=request.user.email, telefone=request.POST['telefone'], veiculo=veiculo,
-                                    data=request.POST['data'], hora=request.POST['hora'], descricao=request.POST['descricao'])
+                                    data=request.POST['data'], hora=request.POST['hora'],
+                                    descricao=request.POST['descricao'])
                 utilizador = Utilizador.objects.get(user=request.user)
                 marcacao.utilizador = utilizador
                 marcacao.estado = "pendente"
+                marcacao.orcamento = "a definir"
                 marcacao.save()
             else:
                 veiculo = form2.save()
                 marcacao = Marcacao(nome=request.POST['nome'], apelido=request.POST['apelido'],
                                     email=request.POST['email'], telefone=request.POST['telefone'], veiculo=veiculo,
-                                    data=request.POST['data'], hora=request.POST['hora'], descricao=request.POST['descricao'])
+                                    data=request.POST['data'], hora=request.POST['hora'],
+                                    descricao=request.POST['descricao'])
                 marcacao.estado = "pendente"
+                marcacao.orcamento = "a definir"
                 marcacao.save()
             return redirect('automecom:marcacoes')
         else:
@@ -225,7 +256,7 @@ def marcacao_edit(request, post_id):
         return HttpResponseRedirect(reverse('automecom:Home'))
 
     if request.method == 'POST':
-        form = MarcacaoEditForm(request.POST, request.FILES, instance=post)
+        form = MarcacaoEditForm(request.POST or None, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('automecom:marcacoes'))

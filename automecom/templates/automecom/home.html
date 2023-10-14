@@ -2,18 +2,63 @@
 
 {% block main %}
 {% load static %}
-    <img id="mecanico" src="{% static 'automecom/images/mecanico.png' %}"  alt="mechanic">
-    <br>
-    <div class="entrada">
-    <h1>Oficina Auto Mecom</h1>
-    <br>
-    <br>
-    <p>Bem-vindo(a) ao nosso website! Estamos felizes por ter<br> você aqui. Navegue pelas nossas páginas e descubra<br> todos os produtos e serviços que temos a oferecer.</p>
-<br><br>
+<div class="slideshow-container">
+  <div class="mySlides fade">
+    <img class="imagem" src="{% static 'automecom/images/foraauto.jpg' %}" alt="imagem1">
+  </div>
+
+  <div class="mySlides fade">
+    <img class="imagem" src="{% static 'automecom/images/equipaauto.jpg' %}" alt="imagem2">
+  </div>
+
+  <div class="mySlides fade">
+    <img class="imagem" src="{% static 'automecom/images/autodentro.JPG' %}" alt="imagem3">
+  </div>
+
+  <div class="mySlides fade">
+    <img class="imagem" src="{% static 'automecom/images/pintura.jpg' %}" alt="imagem3">
+  </div>
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+
+    <script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+</script>
+    <div class="promo">
+        <div>
+            <a href="campanha.html"><img class="promoimg" src="{% static 'automecom/images/promolampada.png' %}" alt="imagem4"></a>
+        </div>
+        <div>
+            <img class="promoimg" src="{% static 'automecom/images/promo2.jpg' %}" alt="imagem4">
+        </div>
     </div>
-    <br>
-    <br>
-    <br>
-
 {% endblock %}
-

@@ -22,16 +22,15 @@
 
 <body>
   <header>
-      <nav class="logo"><a href="home.html">AUTO MECOM</a></nav>
-    <nav>
-        <a href="sobre.html">Sobre</a>
-        <a href="servico.html">Serviços</a>
-        <a href="conselhos.html">Conselhos</a>
-        <a href="contactos.html">Contactos</a>
-        <a href="marcacao">Marcação</a>
+      <nav class="logo"><a class="textmenu" href="home.html">AUTO MECOM</a></nav>
+    <nav class="textmenu">
+        <a href="sobre.html">OFICINA</a>
+        <a href="servico.html">SERVIÇOS</a>
+        <a href="conselhos.html">CONSELHOS</a>
+        <a href="contactos.html">CONTACTOS</a>
+        <a href="marcacao">MARCAÇÃO</a>
         {% if not request.user.is_authenticated %}
-                <a href="login.html">Login</a>
-                <a href="register.html">Registar</a>
+                <a href="login.html">A MINHA CONTA</a>
         {% endif %}
         <div class="subnav">
         {% if request.user.is_authenticated %}
@@ -43,6 +42,7 @@
                         {% else %}
                         <a href="marcacoes">Marcações</a>
                     {% endif %}
+                    <a href="obras.html">Obras Realizadas</a>
                     <a href="logout">Terminar sessão</a>
                 </div>
         {% endif %}
@@ -65,9 +65,9 @@
                       <ul class="sub-menu">
                           <p>2023 © AutoMecom</p>
                           <br>
-                            <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+                            <li><a href="privacidade.html">Política de Privacidade</a></li>
 
-                            <li><a href="/regulamento-da-garantia-na-manutencao-auto">Regulamento da Garantia na Manutenção Auto</a></li>
+                            <li><a href="garantia.html">Regulamento da Garantia na Manutenção Auto</a></li>
                       </ul>
                   </div>
               </div>

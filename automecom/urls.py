@@ -20,4 +20,7 @@ urlpatterns = [
     path('marcacoes', views.marcacoes_view, name="marcacoes"),
     path('editmarc/<int:post_id>', views.marcacao_edit, name='editarmarc'),
     path('deletemarc/<int:post_id>', views.marcacao_delete, name='apagarmarc'),
+    path('garantia.html', views.garantia_view, name='garantia'),
+    path('privacidade.html', views.privacidade_view, name='privacidade'),
+    path('obras.html', views.obras_view, name='obras'),
 ]

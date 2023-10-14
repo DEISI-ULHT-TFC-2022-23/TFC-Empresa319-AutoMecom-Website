@@ -4,12 +4,20 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+class TipoServico(models.Model):
+    nome = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nome
+
+
 class Servico(models.Model):
     nome = models.CharField(max_length=50)
     descricao = models.CharField(max_length=350, default="", blank=True)
+    tipo = models.ManyToManyField(TipoServico)
 
     def __str__(self):
-        return self.nome[:40]
+        return self.nome
 
 
 class Veiculo(models.Model):
@@ -17,6 +25,7 @@ class Veiculo(models.Model):
     modelo = models.CharField(max_length=200)
     ano = models.PositiveIntegerField(default=0000)
     matricula = models.CharField(max_length=8)
+    kms = models.IntegerField(default=0)
 
     def __str__(self):
         return self.marca + " " + self.modelo
@@ -40,10 +49,20 @@ class Marcacao(models.Model):
     servicos = models.ManyToManyField(Servico)
     veiculo = models.OneToOneField(Veiculo, on_delete=models.CASCADE)
     data = models.CharField(max_length=200, default=0)
-    hora = models.CharField(max_length=200,default=0)
+    hora = models.CharField(max_length=200, default=0)
     descricao = models.TextField(max_length=500)
-    estado = models.CharField(max_length=50)
+
+    ESTADOS = [
+        ('PC', 'Por confirmar'),
+        ('CO', "Confirmado"),
+        ('Fi', 'Terminado')
+    ]
+    estado = models.CharField(max_length=50, choices=ESTADOS, default='PC')
+
     numero = models.IntegerField(default=0)
+    orcamento = models.TextField(max_length=500, default="a definir")
+    observacoes = models.TextField(max_length=500, default=" ")
+    fatura = models.FileField(upload_to='tarefas/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.nome} - {self.data}"
