@@ -16,25 +16,29 @@
 
 {% block main %}
 {% load static %}
-
-
-<h1>EFETUE UM PEDIDO DE MARCAÇÃO</h1>
-
-<form action="{% url 'automecom:Marcação' %}" method="post">
+<div class="containermarc">
+<div class="marcacoes-container">
+    <form action="{% url 'automecom:Marcação' %}" method="post">
         {% csrf_token %}
-        <h2>Marcação</h2>
-        <table>
-	    {{ form }}
+        <div class="marcacao">
+            <h2>Marcação</h2><br>
+            <table>
+                {{ form }}
+            </table>
+        </div>
 
-        </table>
+        <div class="marcacao">
+            <br>
+            <h2>Veículo</h2>
+            <br>
+            <table>
+                {{ form2 }}
+            </table>
+        </div>
+        <bR>
 
-    <br>
-    <h2>Veículo</h2>
-        <table>
-	    {{ form2 }}
-        </table>
-	    <input type="submit" value="Marcar" />
-</form>
-
-
+        <button class="buttonmarc" type="submit">Marcar</button>
+    </form>
+</div>
+</div>
 {% endblock %}

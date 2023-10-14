@@ -25,6 +25,19 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = 'Username'
+        self.fields['first_name'].widget.attrs['placeholder'] = 'Nome próprio'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'Apelido'
+        self.fields['email'].widget.attrs['placeholder'] = 'E-mail'
+        self.fields['password1'].widget.attrs['placeholder'] = 'Palavra passe'
+        self.fields['password2'].widget.attrs['placeholder'] = '********'
+
+        self.fields['username'].help_text = '150 caracteres ou menos. Somente letras, dígitos e @/./+/-/_.'
+        self.fields['password1'].help_text = 'Sua senha deve conter pelo menos 8 caracteres.'
+        self.fields['password2'].help_text = 'Digite a mesma senha de antes, para verificação.'
+
 
 class UserForm(forms.ModelForm):
     class Meta:
