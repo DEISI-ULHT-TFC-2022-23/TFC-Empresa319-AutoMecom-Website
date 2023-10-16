@@ -12,31 +12,35 @@
 {% load static %}
 
 <body>
-{% if user|is_administrador %}
-<p>Lista de Marcações</p>
-{% else %}
-<p>Suas Marcações</p>
-{% endif %}
-
 <section>
 {% for marcacao in marcacoes %}
-    <div class="Serv">
+    {% if marcacao.estado != "Terminado" %}
+    <div class="Serv{% if user|is_administrador %} administrador{% endif %}">
         <div>
             <br>
             {% if user|is_administrador %}
-            <p>{{marcacao.nome}} {{marcacao.apelido}}</p>
+            <p>Cliente: {{marcacao.nome}} {{marcacao.apelido}}</p>
             {% for servico in marcacao.servicos.all %}
-            <p>{{ servico.nome }}</p>
+            <p>Serviço(s): {{ servico.nome }}</p>
             {% endfor %}
-            <p>{{marcacao.descricao}}</p>
-            <p>{{marcacao.data}} / {{marcacao.hora}}</p>
-            <p>{{marcacao.orcamento}}</p>
-            <p>{{marcacao.estado}}</p>
+            <p>Data: {{marcacao.data}} / {{marcacao.hora}}h</p>
+            {% if marcacao.orcamento %}
+            <p>Orçamento: <a href="{{ marcacao.orcamento.url }}" target="_blank">Ver Orçamento</a></p>
             {% else %}
-            <p>{{marcacao.descricao}}</p>
-            <p>{{marcacao.data}} / {{marcacao.hora}}</p>
-            <p>{{marcacao.orcamento}}</p>
-            <p>{{marcacao.estado}}</p>
+            <p>Nenhum orçamento associado a esta obra.</p>
+            {% endif %}
+            <p>Estado: {{marcacao.estado}}</p>
+            {% else %}
+            <p>Data: {{marcacao.data}}</p><p>Hora: {{marcacao.hora}}h</p>
+            {% for servico in marcacao.servicos.all %}
+            <p>Serviço(s): {{ servico.nome }}</p>
+            {% endfor %}
+            {% if marcacao.orcamento %}
+            <p>Orçamento: <a href="{{ marcacao.orcamento.url }}" target="_blank">Ver Orçamento</a></p>
+            {% else %}
+            <p>Nenhum orçamento associado a esta obra.</p>
+            {% endif %}
+            <p>Estado: {{marcacao.estado}}</p>
             {% endif %}
             <br>
         </div>
@@ -49,6 +53,7 @@
     <a href="{% url 'automecom:apagarmarc' marcacao.id %}" class="botao">Cancelar</a>
     {% endif %}
     <br>
+    {% endif %}
 {% endfor %}
 </section>
 

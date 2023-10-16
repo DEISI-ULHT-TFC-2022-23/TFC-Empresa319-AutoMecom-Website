@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
@@ -44,6 +42,10 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['username', 'email']
 
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['username'].help_text = '150 caracteres ou menos. Somente letras, dígitos e @/./+/-/_.'
+
 
 class UtilizadorForm(forms.ModelForm):
     class Meta:
@@ -57,6 +59,8 @@ class PasswordForm(PasswordChangeForm):
         self.fields['old_password'].widget.attrs['placeholder'] = 'Senha atual'
         self.fields['new_password1'].widget.attrs['placeholder'] = 'Nova senha'
         self.fields['new_password2'].widget.attrs['placeholder'] = 'Confirme a nova senha'
+
+        self.fields['new_password1'].help_text = ''
 
 
 class VeiculoForm(forms.ModelForm):
@@ -81,3 +85,9 @@ class MarcacaoEditForm(forms.ModelForm):
         model = Marcacao
         fields = ['nome', 'apelido', 'email', 'servicos', 'telefone', 'data', 'descricao', 'estado', 'hora',
                   'orcamento', 'observacoes', 'fatura']
+
+
+class MarcacaoEditFormClient(forms.ModelForm):
+    class Meta:
+        model = Marcacao
+        fields = ['nome', 'apelido', 'email', 'servicos', 'telefone', 'data', 'descricao', 'hora']

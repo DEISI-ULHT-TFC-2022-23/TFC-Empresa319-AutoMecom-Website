@@ -52,14 +52,14 @@ class Marcacao(models.Model):
     descricao = models.TextField(max_length=500)
 
     ESTADOS = [
-        ('PC', 'Por confirmar'),
-        ('CO', "Confirmado"),
-        ('Fi', 'Terminado')
+        ('Por confirmar', 'Por confirmar'),
+        ('Confirmado', "Confirmado"),
+        ('Terminado', 'Terminado')
     ]
-    estado = models.CharField(max_length=50, choices=ESTADOS, default='PC')
+    estado = models.CharField(max_length=50, choices=ESTADOS, default='Por confirmar')
 
     numero = models.IntegerField(default=0)
-    orcamento = models.TextField(max_length=500, default="a definir")
+    orcamento = models.FileField(upload_to='tarefas/', null=True, blank=True)
     observacoes = models.TextField(max_length=500, default=" ")
     fatura = models.FileField(upload_to='tarefas/', null=True, blank=True)
 

@@ -328,6 +328,17 @@ div.h2{
     padding: 40px;
 }
 
+.title2{
+    font-size: 3rem;
+    font-weight: 835;
+    font-stretch: normal;
+    font-style: italic;
+    line-height: 1.2;
+    text-align: center;
+    font-family: inherit;
+    padding: 30px;
+}
+
 * {box-sizing:border-box}
 
 .slideshow-container {
@@ -506,6 +517,50 @@ background-attachment: fixed;
 background-repeat: no-repeat;
 }
 
+.cabeçalho7{
+background-image:url('{{ STATIC_URL }}images/foraauto.jpg');
+background-size: cover;
+background-position: center;
+height: 45vh;
+width:100%;
+min-height: 200px;
+background-attachment: fixed;
+background-repeat: no-repeat;
+}
+
+.cabeçalho8{
+background-image:url('{{ STATIC_URL }}images/pintura.jpg');
+background-size: cover;
+background-position: center;
+height: 45vh;
+width:100%;
+min-height: 200px;
+background-attachment: fixed;
+background-repeat: no-repeat;
+}
+
+.cabeçalho9{
+background-image:url('{{ STATIC_URL }}images/instala.jpg');
+background-size: cover;
+background-position: center;
+height: 45vh;
+width:100%;
+min-height: 200px;
+background-attachment: fixed;
+background-repeat: no-repeat;
+}
+
+.cabeçalho10{
+background-image:url('{{ STATIC_URL }}images/oficina2.jpg');
+background-size: cover;
+background-position: center;
+height: 45vh;
+width:100%;
+min-height: 200px;
+background-attachment: fixed;
+background-repeat: no-repeat;
+}
+
 
 .textoM {
 height: 200px;
@@ -535,7 +590,7 @@ padding-right:380px;
 background-image: url('{{ STATIC_URL }}images/servico.png');
 background-size: cover;
 background-position: center;
-height: 45vh;
+height: 30vh;
 width:100%;
 }
 
@@ -682,3 +737,48 @@ table td, table th {
 .containermarc{
     padding-top: 35px;
 }
+
+/* Estilo para a seção de marcações */
+section {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    text-align: center;
+}
+
+/* Estilo para a caixa de marcação */
+.Serv {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para texto principal */
+.Serv h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Estilo para os parágrafos dentro das caixas */
+.Serv p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+ul, ol {
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+
+.reg {
+    margin-bottom: 10px;
+    list-style: none;
+    padding-left: 10px;
+}
+
+

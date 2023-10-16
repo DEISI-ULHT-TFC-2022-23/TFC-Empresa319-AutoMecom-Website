@@ -2,7 +2,6 @@
 
 
 {% block main %}
-<h3>Novo Post</h3>
 <section>
 <form method ="POST" action="{% url 'automecom:editarmarc'  post_id %}" enctype="multipart/form-data">
     {% csrf_token %}

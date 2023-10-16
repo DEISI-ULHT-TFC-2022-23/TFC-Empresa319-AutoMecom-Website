@@ -12,9 +12,7 @@
 {% load static %}
 <body>
 
-<div class="cabeçalho">
-        <div class="texto"><h1>Oficina Auto Mecom – Serviços de Mecânica e Colisão</h1></div>
-</div>
+<div class="cabeçalho"></div><br>
 
 <div class="Serviços">
 
@@ -39,10 +37,13 @@
 {% endfor %}
 </section>
     {% if administrador %}
-        <a href="{% url 'automecom:Create' %}" class="botao">+ Adicionar Serviço</a>
+        <p style="text-align: center"><a href="{% url 'automecom:Create' %}" class="botao">+ Adicionar Serviço</a></p>
     {% endif %}
     </div>
-</div>
 </body>
 </html>
+    <br>
+    <br>
+    <br>
+    <br>
 {% endblock %}

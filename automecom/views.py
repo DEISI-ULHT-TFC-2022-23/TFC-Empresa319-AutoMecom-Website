@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from automecom.templatetags.custom_tags import is_administrador
 from .forms import ServicoForm, UtilizadorForm, UserForm, PasswordForm, RegisterForm, MarcacaoForm, VeiculoForm, \
-    MarcacaoEditForm
+    MarcacaoEditForm, MarcacaoEditFormClient
 from .models import Servico, Utilizador, Veiculo, Marcacao
 from django import template
 
@@ -233,8 +233,6 @@ def marcacao_view(request):
                                     descricao=request.POST['descricao'])
                 utilizador = Utilizador.objects.get(user=request.user)
                 marcacao.utilizador = utilizador
-                marcacao.estado = "pendente"
-                marcacao.orcamento = "a definir"
                 marcacao.save()
             else:
                 veiculo = form2.save()
@@ -242,8 +240,6 @@ def marcacao_view(request):
                                     email=request.POST['email'], telefone=request.POST['telefone'], veiculo=veiculo,
                                     data=request.POST['data'], hora=request.POST['hora'],
                                     descricao=request.POST['descricao'])
-                marcacao.estado = "pendente"
-                marcacao.orcamento = "a definir"
                 marcacao.save()
             return redirect('automecom:marcacoes')
         else:
@@ -256,14 +252,23 @@ def marcacao_edit(request, post_id):
         return HttpResponseRedirect(reverse('automecom:Home'))
 
     if request.method == 'POST':
-        form = MarcacaoEditForm(request.POST or None, request.FILES, instance=post)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('automecom:marcacoes'))
+        if is_administrador(request.user):
+            form = MarcacaoEditForm(request.POST or None, request.FILES, instance=post)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('automecom:marcacoes'))
+        else:
+            form = MarcacaoEditFormClient(request.POST or None, request.FILES, instance=post)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('automecom:marcacoes'))
     else:
-        form = MarcacaoEditForm(instance=post)
-    context = {'form': form, 'post_id': post_id}
-    return render(request, 'automecom/editmarcacao.html', context)
+        if is_administrador(request.user):
+            form = MarcacaoEditForm(instance=post)
+        else:
+            form = MarcacaoEditFormClient(instance=post)
+        context = {'form': form, 'post_id': post_id}
+        return render(request, 'automecom/editmarcacao.html', context)
 
 
 def marcacao_delete(request, post_id):
